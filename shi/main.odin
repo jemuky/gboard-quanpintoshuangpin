@@ -1,5 +1,6 @@
 package main
 
+import "core:c/libc"
 import "core:fmt"
 import "core:log"
 import "core:mem"
@@ -12,6 +13,10 @@ main :: proc() {
 	defer log.destroy_console_logger(logger)
 
 	context.logger = logger
+
+	defer {
+		libc.getchar()
+	}
 
 	arg_list := os.args
 	if len(arg_list) <= 1 {
@@ -56,5 +61,7 @@ init :: proc() {
 			mem.tracking_allocator_destroy(&track)
 		}
 	}
-	win.SetConsoleOutputCP(.UTF8)
+	when ODIN_OS == .Windows {
+		win.SetConsoleOutputCP(.UTF8)
+	}
 }
