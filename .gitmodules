@@ -1,0 +1,3 @@
+[submodule "crawl-epub"]
+	path = crawl-epub
+	url = https://github.com/jemuky/crawl-epub.git
